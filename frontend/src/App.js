@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Canvas from './components/Canvas';
 import ImageTag from './components/ImageTag';
+import Fab from './components/Fab';
 
 function App() {
     const [images, setImages] = useState([]);
@@ -53,8 +54,24 @@ function App() {
         };
     }, []);
 
+    const handleFabClick = () => {
+        document.getElementById('fileInput').click();
+    };
+
+    const handleFileInputChange = (e) => {
+        const file = e.target.files[0];
+        handleFile(file);
+    };
+
     return (
         <div>
+            <input
+                type="file"
+                id="fileInput"
+                style={{ display: 'none' }}
+                onChange={handleFileInputChange}
+                accept="image/*"
+            />
             <Canvas
                 images={images}
                 onDrop={handleDrop}
@@ -63,6 +80,7 @@ function App() {
             {images.map((image) => (
                 <ImageTag key={image.id} image={image} addTag={addTag} />
             ))}
+            <Fab onClick={handleFabClick} />
         </div>
     );
 }
