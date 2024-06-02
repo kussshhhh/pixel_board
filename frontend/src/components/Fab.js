@@ -8,3 +8,4 @@ const Fab = ({ onClick }) => (
 );
 
 export default Fab;
+
