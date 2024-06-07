@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Stage, Layer, Image as KonvaImage, Rect, Group, Text } from 'react-konva';
 
-const Canvas = ({ images, onDrop, onDragOver, toggleControls, copyImage, copyImageToClipboard, deleteImage, setUndoStack, setRedoStack, undoStack, redoStack, setImages, selectedImageId, setSelectedImageId }) => {
+const Canvas = ({ images, onDrop, onDragOver, toggleControls, copyImage, copyImageToClipboard, deleteImage, setUndoStack, setRedoStack, undoStack, redoStack, setImages, selectedImageId, setSelectedImageId, imagesToDelete, setImagesToDelete }) => {
     const stageRef = useRef(null);
 
     const handleWheel = (e) => {

@@ -5,28 +5,16 @@ import Fab from './components/Fab';
 import axios from 'axios' ;
 
 function App() {
-    const [images, setImages] = useState([]);
+    const [images, setImages] = useState([]); 
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const [undoStack, setUndoStack] = useState([]);
     const [redoStack, setRedoStack] = useState([]);
     const [selectedImageId, setSelectedImageId] = useState(null);
+    const [imagesToDelete, setImagesToDelete] = useState([]) ;
 
-    // useEffect(() => {    // problem here  ;
-    //     axios.get('http://localhost:3001/images')
-    //         .then(response => {
-    //           console.log(response) ;
-
-    //           response = response.data ;
-    //           let imgarr = [] ;
-    //           for(let i = 0; i < response.length; i++){
-    //                 if( response[i].src != null) imgarr.push(response[i]) ;
-    //           }
-
-    //           setImages(imgarr) ;
-    //           console.log("done") ;
-
-    //         })
-    // }, []);
+    const markImageForDeletion = (imageId) => {
+        setImagesToDelete((prev) => [...prev, imageId]) ;
+    } ;
 
     useEffect(() => {
         axios.get('http://localhost:3001/images')
@@ -51,8 +39,9 @@ function App() {
                     };
                 });
             
+
                 // Wait for all images to load before updating state
-                const imageLoadPromises = loadedImages.map(image => {
+                    const imageLoadPromises = loadedImages.map(image => {
                     return new Promise((resolve, reject) => {
                         image.img.onload = resolve;
                         image.img.onerror = reject;
@@ -68,12 +57,6 @@ function App() {
             })
             .catch(error => console.error('Error fetching images:', error));
     }, []);
-    
-
-
-  
-    
-    
 
 
 
@@ -168,10 +151,9 @@ function App() {
         }));
     };
 
-    const deleteImage = (id) => {
-        setImages(images.filter(image => image.id !== id));
-        const deletedImage = images.find(image => image.id === id);
-        setUndoStack([...undoStack, { type: 'delete', image: deletedImage }]);
+   const deleteImage = (imageId) => {
+        setImages((prevImages) => prevImages.filter((image) => image.id !== imageId));
+        markImageForDeletion(imageId);
     };
 
     const copyImage = (id) => {
@@ -271,6 +253,21 @@ function App() {
             window.removeEventListener('keydown', handleKeyDown);
         };
     }, [mousePosition, undoStack, redoStack, selectedImageId]);
+
+    useEffect(() => {
+        const handleUnload = () => {
+            if (imagesToDelete.length > 0) {
+                navigator.sendBeacon('http://localhost:3001/images/delete', JSON.stringify({ images: imagesToDelete }));
+            }
+        };
+    
+        window.addEventListener('unload', handleUnload);
+    
+        return () => {
+            window.removeEventListener('unload', handleUnload);
+        };
+    }, [imagesToDelete]);
+    
 
     const handleFabClick = () => {
         document.getElementById('fileInput').click();

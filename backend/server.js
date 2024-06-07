@@ -39,6 +39,55 @@ app.delete('/images/:id', (req, res) => {
     res.status(204).send();
 });
 
+app.post('/images/delete', (req, res) => {
+    const { images } = req.body;
+
+    let data = '';
+    try{
+        req.on('data', chunk => {
+            data += chunk; // Collecting the chunks of data
+            // console.log(chunk) ;
+        });
+
+        req.on('end', () => {
+            const parsedData = JSON.parse(data); // Parsing the complete data
+            const imagesToDelete = parsedData.images; // Extracting the images array
+            console.log(imagesToDelete) ;   
+            // Process the imagesToDelete array here
+                const stmt = db.prepare('DELETE FROM images WHERE id = ?');
+                db.transaction(() => {
+                    for (const id of imagesToDelete) {
+                        stmt.run(id);
+                    }
+                })();
+            res.sendStatus(200); // Sending a success response
+        });
+
+    }catch(error){
+        console.log('error',error) ;
+    }
+
+    // try {
+    //     if(imagesToDelete.length > 0){
+    //         const stmt = db.prepare('DELETE FROM images WHERE id = ?');
+    //         db.transaction(() => {
+    //             for (const id of imagesToDelete) {
+    //                 stmt.run(id);
+    //             }
+    //         })();
+
+    //     }
+    //     else{
+    //         console.log("hum pe toh hai na")
+    //     }
+
+    //     res.status(200).send('Images deleted successfully');
+    // } catch (error) {
+    //     console.error('Error deleting images:', error);
+    //     res.status(500).send('Internal Server Error');
+    // }
+});
+
 app.listen(port, () => {
     console.log(`Server running on port: ${port}`);
 });
