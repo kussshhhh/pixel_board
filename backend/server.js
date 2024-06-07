@@ -19,6 +19,7 @@ app.get('/images', (req, res) => {
 
 app.post('/images', (req, res) => {
     const { src, tags, x, y } = req.body;
+    console.log(req) ;
     const stmt = db.prepare('INSERT INTO images (src, tags, x, y) VALUES (?, ?, ?, ?)');
     stmt.run(src, JSON.stringify(tags || []), x, y);  // Default to empty array if tags is undefined
     res.status(201).send();

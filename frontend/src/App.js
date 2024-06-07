@@ -84,14 +84,16 @@ function App() {
         const reader = new FileReader(); 
         reader.onload = () => {
             const img = new window.Image();
-            img.src = reader.result;
+            const src = reader.result ;
+            img.src = src;
             img.onload = () => {
                 const newImage = { id: Date.now(), img, x, y, tags: [], showControls: false };
                 setImages((prevImages) => {
                     const updatedImages = [...prevImages, newImage];
                     setUndoStack([...undoStack, { type: 'add', image: newImage }]);
 
-                    saveImage({id : newImage.id, src : newImage.src, x : newImage.x, y: newImage.y, tags : newImage.tags }) ;
+                    saveImage({id : newImage.id, src : src, x : newImage.x, y: newImage.y, tags : newImage.tags }) ;
+                    console.log(src) ; 
                     return updatedImages;
                 });
             };
