@@ -3,7 +3,11 @@ import Canvas from './components/Canvas';
 import ImageTag from './components/ImageTag';
 import Fab from './components/Fab';
 import axios from 'axios' ;
+// import fs from 'fs'
+// import 'dotenv/config'
 
+const URL = process.env.REACT_APP_BACKEND_URL ; // http://localhost:3000/
+console.log(URL) ;
 function App() {
     const [images, setImages] = useState([]); 
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -17,7 +21,7 @@ function App() {
     } ;
 
     useEffect(() => {
-        axios.get('http://localhost:3001/images')
+        axios.get(`${URL}/images` )
             .then(response => {
                 console.log(response);
             
@@ -102,7 +106,7 @@ function App() {
     };
 
     const saveImage = (image) => {
-        axios.post('http://localhost:3001/images', image)
+        axios.post( `${URL}/images` , image)
             .then(() => {
                 console.log('Image saved successfully');
             })
@@ -259,7 +263,7 @@ function App() {
     useEffect(() => {
         const handleUnload = () => {
             if (imagesToDelete.length > 0) {
-                navigator.sendBeacon('http://localhost:3001/images/delete', JSON.stringify({ images: imagesToDelete }));
+                navigator.sendBeacon(`${URL}/images/delete`, JSON.stringify({ images: imagesToDelete }));
             }
         };
     
