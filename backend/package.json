@@ -1,14 +1,11 @@
-
 {
   "name": "backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "build": "echo 'Build process' && exit 0",  
-    "heroku-postbuild": "npm run build",
-    "postinstall": "npm rebuild better-sqlite3",
+    "start": "node server.js" ,
+   
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -20,9 +17,6 @@
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "sqlite3": "^5.1.7"
-  },
-  "engines": {
-    "node": ">=18.0.0" 
   },
   "type": "module"
 }
