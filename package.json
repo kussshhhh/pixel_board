@@ -1,4 +1,7 @@
 {
+  "scripts": {
+      "dev": "./start-dev.sh"
+  },
   "dependencies": {
     "dotenv": "^16.4.5"
   }
