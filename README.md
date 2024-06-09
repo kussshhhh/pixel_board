@@ -4,9 +4,7 @@
 
 
 ```bash
-cd backend
-node server.js
-cd ..
-cd frontend
-npm run start 
+git clone https://github.com/kussshhhh/pixel_board.git
+cd pixel_board
+npm run dev
 ```
