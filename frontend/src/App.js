@@ -6,7 +6,7 @@ import axios from 'axios' ;
 // import fs from 'fs'
 // import 'dotenv/config'
 
-const URL = process.env.REACT_APP_BACKEND_URL ; // http://localhost:3000/
+const URL =  process.env.REACT_APP_BACKEND_URL || "http://localhost:5000" ;
 console.log(URL) ;
 function App() {
     const [images, setImages] = useState([]); 
