@@ -6,7 +6,7 @@ import axios from 'axios' ;
 // import fs from 'fs'
 // import 'dotenv/config'
 
-const URL =  process.env.REACT_APP_BACKEND_URL || "pixelboard-production.up.railway.app" ;
+const URL =  process.env.REACT_APP_BACKEND_URL || "https://pixelboard-production.up.railway.app" ;
 console.log(URL) ;
 function App() {
     const [images, setImages] = useState([]); 
