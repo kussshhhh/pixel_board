@@ -9,5 +9,5 @@ cd pixel_board
 npm install
 npm run dev
 ```
-demo 
-![Uploading Screencast from 24-08-24 02_26_14 AM IST.gif…]()
+
+![image](https://github.com/user-attachments/assets/c485dcbe-c8ef-4db1-8c0a-8fb97bde8ac5)
