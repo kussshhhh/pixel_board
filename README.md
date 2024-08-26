@@ -10,4 +10,4 @@ npm install
 npm run dev
 ```
 demo 
-https://x.com/i/status/1798013456215675250
+![Uploading Screencast from 24-08-24 02_26_14 AM IST.gif…]()
