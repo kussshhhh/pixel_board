@@ -10,4 +10,4 @@ npm install
 npm run dev
 ```
 
-![image](https://github.com/user-attachments/assets/c485dcbe-c8ef-4db1-8c0a-8fb97bde8ac5)
+deployed link: https://pixel-board-omega.vercel.app/
