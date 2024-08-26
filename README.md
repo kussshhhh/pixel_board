@@ -10,4 +10,4 @@ npm install
 npm run dev
 ```
 demo 
-<video src='https://x.com/i/status/1798013456215675250' width=180/>
+https://x.com/i/status/1798013456215675250
